@@ -20,20 +20,20 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(initialVotes)
 
-  //Function to display a random anecdote
+  // Function to display a random anecdote
   const showRandomAnecdote = () => {
     const randomIndex = Math.floor(Math.random() * anecdotes.length)
     setSelected(randomIndex)
   }
 
-  //Function to handle voting for the currently selected anecdote
+  // Function to handle voting for the currently selected anecdote
   const handleVote = () => {
     const votesCopy = [...votes]
     votesCopy[selected] += 1
     setVotes(votesCopy)
   }
 
-  //Find the index of the anecdote with the most votes
+  // Find the index of the anecdote with the most votes
   const maxVotesIndex = votes.indexOf(Math.max(...votes))
 
   return (
