@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-const baseUrl = "http://localhost:3001/persons"
+const baseUrl = "http://localhost:3001"
 
 // Function to fetch all persons from the server
 const getAll = () => {
