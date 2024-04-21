@@ -1,7 +1,6 @@
 import axios from "axios"
 
-
-const baseUrl = "https://fullstackopen-part3-ad09.onrender.com"
+const baseUrl = "https://fullstackopen-part3-ad09.onrender.com/api/persons"
 
 // Function to fetch all persons from the server
 const getAll = () => {
