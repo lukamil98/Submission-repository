@@ -1,8 +1,7 @@
 import axios from "axios"
 
 // Define the base URL for your backend API
-const backendBaseUrl =
-  "https://fullstackopen-part3-ad09.onrender.com/api/persons"
+const backendBaseUrl = "http://localhost:3001/"
 
 // Create an instance of Axios with the base URL
 const instance = axios.create({
@@ -11,22 +10,59 @@ const instance = axios.create({
 
 // Function to fetch all persons from the server
 const getAll = () => {
-  return instance.get("/").then((response) => response.data)
+  return instance.get("/api/persons").then((response) => response.data)
 }
 
 // Function to add a new person to the server
 const create = (newPerson) => {
-  return instance.post("/", newPerson).then((response) => response.data)
+  // Check if the person's name is shorter than 3 characters
+  if (newPerson.name.length < 3) {
+    // Throw an error with a specific message indicating the validation failure
+    throw new Error("Name must be at least 3 characters long.")
+  }
+
+  // If the name is valid, make the POST request to the server
+  return instance
+    .post("/api/persons", newPerson)
+    .then((response) => response.data)
+    .catch((error) => {
+      // Handle server-side errors and other errors
+      if (error.response && error.response.data.error) {
+        throw new Error(error.response.data.error) // Handle server-side errors
+      } else {
+        throw new Error("An unexpected error occurred.") // Handle other errors
+      }
+    })
 }
+
 
 // Function to remove a person from the server by ID
-const remove = (id) => {
-  return instance.delete(`/${id}`)
+const remove = (_id) => {
+  console.log("Removing person with ID:", _id) // Log the ID before deletion
+  return instance
+    .delete(`/api/persons/${_id}`)
+    .then((response) => response.data)
+    .catch((error) => {
+      if (error.response && error.response.data.error) {
+        throw new Error(error.response.data.error) // Handle server-side errors
+      } else {
+        throw new Error("An unexpected error occurred.") // Handle other errors
+      }
+    })
 }
 
-// Function to update a person's information on the server
-const update = (id, updatedPerson) => {
-  return instance.put(`/${id}`, updatedPerson).then((response) => response.data)
+// Function to update a person's information by ID
+const update = (_id, updatedPerson) => {
+  return instance
+    .put(`/api/persons/${_id}`, updatedPerson)
+    .then((response) => response.data)
+    .catch((error) => {
+      if (error.response && error.response.data.error) {
+        throw new Error(error.response.data.error) // Handle server-side errors
+      } else {
+        throw new Error("An unexpected error occurred.") // Handle other errors
+      }
+    })
 }
 
 // Object containing all the service functions

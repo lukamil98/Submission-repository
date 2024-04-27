@@ -1,0 +1,17 @@
+.success {
+  color: #0bd600; /* Green color for success messages */
+  background: rgb(255, 255, 255);
+}
+
+.error {
+  color: #cc0000; /* Red color for error messages */
+  background: #ffcccc;
+}
+
+.notification {
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}

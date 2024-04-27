@@ -1,4 +1,3 @@
-// PersonList.jsx
 import React from "react"
 
 const PersonList = ({ persons, deletePerson }) => {
@@ -6,7 +5,7 @@ const PersonList = ({ persons, deletePerson }) => {
     <ul>
       {persons.map((person) => (
         <li key={person.id}>
-          {person.name} {person.number}
+          {person.name} - {person.number}
           <button onClick={() => deletePerson(person.id)}>Delete</button>
         </li>
       ))}
